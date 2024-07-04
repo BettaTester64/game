@@ -28,6 +28,9 @@ import { UpdateGameSessionArgs } from "./UpdateGameSessionArgs";
 import { DeleteGameSessionArgs } from "./DeleteGameSessionArgs";
 import { StrategyFindManyArgs } from "../../strategy/base/StrategyFindManyArgs";
 import { Strategy } from "../../strategy/base/Strategy";
+import { GameSessionCreateInput } from "./GameSessionCreateInput";
+import { GameSessionWhereUniqueInput } from "./GameSessionWhereUniqueInput";
+import { GameSessionUpdateInput } from "./GameSessionUpdateInput";
 import { GameSessionService } from "../gameSession.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => GameSession)
@@ -162,5 +165,45 @@ export class GameSessionResolverBase {
     }
 
     return results;
+  }
+
+  @graphql.Mutation(() => GameSession)
+  async CreateGameSession(
+    @graphql.Args()
+    args: GameSessionCreateInput
+  ): Promise<GameSession> {
+    return this.service.CreateGameSession(args);
+  }
+
+  @graphql.Mutation(() => GameSession)
+  async DeleteGameSession(
+    @graphql.Args()
+    args: DeleteGameSessionArgs
+  ): Promise<GameSession> {
+    return this.service.DeleteGameSession(args);
+  }
+
+  @graphql.Query(() => GameSession)
+  async GetGameSessionById(
+    @graphql.Args()
+    args: GameSessionWhereUniqueInput
+  ): Promise<GameSession> {
+    return this.service.GetGameSessionById(args);
+  }
+
+  @graphql.Query(() => [GameSession])
+  async ListGameSessions(
+    @graphql.Args()
+    args: GameSessionFindManyArgs[]
+  ): Promise<GameSession[]> {
+    return this.service.ListGameSessions(args);
+  }
+
+  @graphql.Mutation(() => GameSession)
+  async UpdateGameSession(
+    @graphql.Args()
+    args: GameSessionUpdateInput
+  ): Promise<GameSession> {
+    return this.service.UpdateGameSession(args);
   }
 }

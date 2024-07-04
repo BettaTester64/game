@@ -29,6 +29,8 @@ import { StrategyUpdateInput } from "./StrategyUpdateInput";
 import { ResultFindManyArgs } from "../../result/base/ResultFindManyArgs";
 import { Result } from "../../result/base/Result";
 import { ResultWhereUniqueInput } from "../../result/base/ResultWhereUniqueInput";
+import { GameSessionFindManyArgs } from "../../gameSession/base/GameSessionFindManyArgs";
+import { GameSession } from "../../gameSession/base/GameSession";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -432,5 +434,22 @@ export class StrategyControllerBase {
       data,
       select: { id: true },
     });
+  }
+
+  @common.Get("/strategies")
+  @swagger.ApiOkResponse({
+    type: GameSession,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async ListStrategies(
+    @common.Body()
+    body: GameSessionFindManyArgs[]
+  ): Promise<GameSession[]> {
+    return this.service.ListStrategies(body);
   }
 }

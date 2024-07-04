@@ -27,6 +27,8 @@ import { CreateResultArgs } from "./CreateResultArgs";
 import { UpdateResultArgs } from "./UpdateResultArgs";
 import { DeleteResultArgs } from "./DeleteResultArgs";
 import { Strategy } from "../../strategy/base/Strategy";
+import { GameSessionFindManyArgs } from "../../gameSession/base/GameSessionFindManyArgs";
+import { GameSession } from "../../gameSession/base/GameSession";
 import { ResultService } from "../result.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Result)
@@ -174,5 +176,13 @@ export class ResultResolverBase {
       return null;
     }
     return result;
+  }
+
+  @graphql.Query(() => [GameSession])
+  async ListResults(
+    @graphql.Args()
+    args: GameSessionFindManyArgs[]
+  ): Promise<GameSession[]> {
+    return this.service.ListResults(args);
   }
 }

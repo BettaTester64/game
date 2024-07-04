@@ -5,6 +5,8 @@ import { StrategyModule } from "./strategy/strategy.module";
 import { ResultModule } from "./result/result.module";
 import { ScenarioModule } from "./scenario/scenario.module";
 import { UserModule } from "./user/user.module";
+import { AdminRoleModule } from "./AdminRole/adminrole.module";
+import { PlayerRoleModule } from "./PlayerRole/playerrole.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -28,6 +30,8 @@ import { AuthModule } from "./auth/auth.module";
     ResultModule,
     ScenarioModule,
     UserModule,
+    AdminRoleModule,
+    PlayerRoleModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

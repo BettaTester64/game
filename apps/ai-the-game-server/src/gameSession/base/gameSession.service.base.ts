@@ -15,6 +15,12 @@ import {
   GameSession as PrismaGameSession,
   Strategy as PrismaStrategy,
 } from "@prisma/client";
+import { GameSessionCreateInput } from "./GameSessionCreateInput";
+import { GameSession } from "./GameSession";
+import { DeleteGameSessionArgs } from "./DeleteGameSessionArgs";
+import { GameSessionWhereUniqueInput } from "./GameSessionWhereUniqueInput";
+import { GameSessionFindManyArgs } from "./GameSessionFindManyArgs";
+import { GameSessionUpdateInput } from "./GameSessionUpdateInput";
 
 export class GameSessionServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -60,5 +66,24 @@ export class GameSessionServiceBase {
         where: { id: parentId },
       })
       .strategies(args);
+  }
+  async CreateGameSession(args: GameSessionCreateInput): Promise<GameSession> {
+    throw new Error("Not implemented");
+  }
+  async DeleteGameSession(args: DeleteGameSessionArgs): Promise<GameSession> {
+    throw new Error("Not implemented");
+  }
+  async GetGameSessionById(
+    args: GameSessionWhereUniqueInput
+  ): Promise<GameSession> {
+    throw new Error("Not implemented");
+  }
+  async ListGameSessions(
+    args: GameSessionFindManyArgs[]
+  ): Promise<GameSession[]> {
+    throw new Error("Not implemented");
+  }
+  async UpdateGameSession(args: GameSessionUpdateInput): Promise<GameSession> {
+    throw new Error("Not implemented");
   }
 }

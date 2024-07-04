@@ -310,4 +310,89 @@ export class GameSessionControllerBase {
       select: { id: true },
     });
   }
+
+  @common.Post("/game-sessions")
+  @swagger.ApiOkResponse({
+    type: GameSession,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async CreateGameSession(
+    @common.Body()
+    body: GameSessionUpdateInput
+  ): Promise<GameSession> {
+    return this.service.CreateGameSession(body);
+  }
+
+  @common.Delete("/game-sessions/:id")
+  @swagger.ApiOkResponse({
+    type: GameSession,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async DeleteGameSession(
+    @common.Body()
+    body: GameSessionUpdateInput
+  ): Promise<GameSession> {
+    return this.service.DeleteGameSession(body);
+  }
+
+  @common.Get("/game-sessions/:id")
+  @swagger.ApiOkResponse({
+    type: GameSession,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetGameSessionById(
+    @common.Body()
+    body: GameSessionUpdateInput
+  ): Promise<GameSession> {
+    return this.service.GetGameSessionById(body);
+  }
+
+  @common.Get("/game-sessions")
+  @swagger.ApiOkResponse({
+    type: GameSession,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async ListGameSessions(
+    @common.Body()
+    body: GameSessionUpdateInput
+  ): Promise<GameSession[]> {
+    return this.service.ListGameSessions(body);
+  }
+
+  @common.Put("/game-sessions/:id")
+  @swagger.ApiOkResponse({
+    type: GameSession,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async UpdateGameSession(
+    @common.Body()
+    body: GameSessionUpdateInput
+  ): Promise<GameSession> {
+    return this.service.UpdateGameSession(body);
+  }
 }

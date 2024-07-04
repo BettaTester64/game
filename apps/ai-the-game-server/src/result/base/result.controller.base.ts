@@ -26,6 +26,8 @@ import { Result } from "./Result";
 import { ResultFindManyArgs } from "./ResultFindManyArgs";
 import { ResultWhereUniqueInput } from "./ResultWhereUniqueInput";
 import { ResultUpdateInput } from "./ResultUpdateInput";
+import { GameSessionFindManyArgs } from "../../gameSession/base/GameSessionFindManyArgs";
+import { GameSession } from "../../gameSession/base/GameSession";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -239,5 +241,22 @@ export class ResultControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.Get("/results")
+  @swagger.ApiOkResponse({
+    type: GameSession,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async ListResults(
+    @common.Body()
+    body: GameSessionFindManyArgs[]
+  ): Promise<GameSession[]> {
+    return this.service.ListResults(body);
   }
 }

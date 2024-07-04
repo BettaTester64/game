@@ -20,6 +20,9 @@ import {
   Scenario as PrismaScenario,
 } from "@prisma/client";
 
+import { GameSessionFindManyArgs } from "../../gameSession/base/GameSessionFindManyArgs";
+import { GameSession } from "../../gameSession/base/GameSession";
+
 export class StrategyServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
 
@@ -86,5 +89,10 @@ export class StrategyServiceBase {
         where: { id: parentId },
       })
       .scenario();
+  }
+  async ListStrategies(
+    args: GameSessionFindManyArgs[]
+  ): Promise<GameSession[]> {
+    throw new Error("Not implemented");
   }
 }
