@@ -1,0 +1,80 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Player {
+  createdAt  DateTime   @default(now())
+  email      String?
+  id         String     @id @default(cuid())
+  score      Int?
+  strategies Strategy[]
+  updatedAt  DateTime   @updatedAt
+  username   String?
+}
+
+model GameSession {
+  createdAt  DateTime               @default(now())
+  id         String                 @id @default(cuid())
+  name       String?
+  status     EnumGameSessionStatus?
+  strategies Strategy[]
+  updatedAt  DateTime               @updatedAt
+}
+
+model Strategy {
+  createdAt     DateTime     @default(now())
+  description   String?
+  gameSession   GameSession? @relation(fields: [gameSessionId], references: [id])
+  gameSessionId String?
+  id            String       @id @default(cuid())
+  player        Player?      @relation(fields: [playerId], references: [id])
+  playerId      String?
+  results       Result[]
+  scenario      Scenario?    @relation(fields: [scenarioId], references: [id])
+  scenarioId    String?
+  updatedAt     DateTime     @updatedAt
+}
+
+model Result {
+  createdAt   DateTime           @default(now())
+  description String?
+  id          String             @id @default(cuid())
+  outcome     EnumResultOutcome?
+  strategy    Strategy?          @relation(fields: [strategyId], references: [id])
+  strategyId  String?
+  updatedAt   DateTime           @updatedAt
+}
+
+model Scenario {
+  createdAt   DateTime   @default(now())
+  description String?
+  id          String     @id @default(cuid())
+  strategies  Strategy[]
+  title       String?
+  updatedAt   DateTime   @updatedAt
+}
+
+model User {
+  createdAt DateTime @default(now())
+  email     String?  @unique
+  firstName String?
+  id        String   @id @default(cuid())
+  lastName  String?
+  password  String
+  roles     Json
+  updatedAt DateTime @updatedAt
+  username  String   @unique
+}
+
+enum EnumGameSessionStatus {
+  Option1
+}
+
+enum EnumResultOutcome {
+  Option1
+}
